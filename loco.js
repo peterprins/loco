@@ -15,8 +15,8 @@ var $ready = function(callback_fn){
     document.addEventListener( 'DOMContentLoaded', function(){
 
         // debug ready
-        console.log( 'get ready!' );
-        console.log( 'callback: ' , callback_fn );
+        //console.log( 'get ready!' );
+        //console.log( 'callback: ' , callback_fn );
 
         callback_fn();
 
@@ -27,7 +27,7 @@ var $ready = function(callback_fn){
 // loco
 var $loco = function($selectors) {
 
-    console.log( 'get loco!' );
+    //console.log( 'get loco!' );
 
     // methods
     var methods = {
@@ -37,14 +37,14 @@ var $loco = function($selectors) {
             // js_in: classes_str
             var data_str = { "event_str" : js_in,
                              "callback_fn" : callback_fn }
-            this.js_out = this.updateEl($selectors, data_str, 'onEvent') ? true : false;
+            this.js_out = this.upEl($selectors, data_str, 'onEvent') ? true : false;
             return this;
         },
 
         // lowerCase
         lowerCase: function(js_in) {
             // js_in: classes_str
-            this.js_out = this.updateEl($selectors, js_in, 'lowerCase') ? true : false;
+            this.js_out = this.upEl($selectors, js_in, 'lCase') ? true : false;
             return this;
         },
 
@@ -52,7 +52,7 @@ var $loco = function($selectors) {
         upperCase: function(js_in) {
             // js_in: classes_str
             this.js_out =
-                this.updateEl($selectors, js_in, 'upperCase') ? true : false;
+                this.upEl($selectors, js_in, 'uCase') ? true : false;
             return this;
         },
 
@@ -60,7 +60,7 @@ var $loco = function($selectors) {
         camelCase: function(js_in) {
             // js_in: classes_str
             this.js_out =
-                this.updateEl($selectors, js_in, 'camelCase') ? true : false;
+                this.upEl($selectors, js_in, 'cCase') ? true : false;
             return this;
         },
 
@@ -68,7 +68,7 @@ var $loco = function($selectors) {
         trimHTML: function(js_in) {
             // js_in: classes_str
             this.js_out =
-                this.updateEl($selectors, js_in, 'trimHTML') ? true : false;
+                this.upEl($selectors, js_in, 'tHTML') ? true : false;
             return this;
         },
 
@@ -76,7 +76,7 @@ var $loco = function($selectors) {
         addClass: function(js_in) {
             // js_in: classes_str
             this.js_out =
-                this.updateEl($selectors, js_in, 'addClass') ? true : false;
+                this.upEl($selectors, js_in, 'aClass') ? true : false;
             return this;
         },
 
@@ -84,7 +84,7 @@ var $loco = function($selectors) {
         removeClass: function(js_in) {
             // js_in: classes_str
             this.js_out =
-                this.updateEl($selectors, js_in, 'removeClass') ? true : false;
+                this.upEl($selectors, js_in, 'rClass') ? true : false;
             return this;
         },
 
@@ -92,7 +92,7 @@ var $loco = function($selectors) {
         addHTML: function(js_in) {
             // js_in: html_str
             this.js_out =
-                this.updateEl($selectors, js_in, 'addHTML') ? true : false;
+                this.upEl($selectors, js_in, 'adHTML') ? true : false;
             return this;
         },
 
@@ -100,7 +100,7 @@ var $loco = function($selectors) {
         appendHTML: function(js_in) {
             // js_in: html_str
             this.js_out =
-                this.updateEl($selectors, js_in, 'appendHTML') ? true : false;
+                this.upEl($selectors, js_in, 'apHTML') ? true : false;
             return this;
         },
 
@@ -108,7 +108,7 @@ var $loco = function($selectors) {
         replaceHTML: function(js_in) {
             // js_in: html_str
             this.js_out =
-                this.updateEl($selectors, js_in, 'replaceHTML') ? true : false;
+                this.upEl($selectors, js_in, 'rHTML') ? true : false;
             return this;
         },
 
@@ -116,7 +116,7 @@ var $loco = function($selectors) {
         addStyle: function(js_in) {
             // js_in: css_str
             this.js_out =
-                this.updateEl($selectors, js_in, 'addStyle') ? true : false;
+                this.upEl($selectors, js_in, 'aStyle') ? true : false;
             return this;
         },
 
@@ -124,7 +124,7 @@ var $loco = function($selectors) {
         removeStyle: function(js_in) {
             // js_in: css_str
             this.js_out =
-                this.updateEl($selectors, js_in, 'removeStyle') ? true : false;
+                this.upEl($selectors, js_in, 'rStyle') ? true : false;
             return this;
         },
       
@@ -132,7 +132,7 @@ var $loco = function($selectors) {
         JSON2UL: function(js_in) {
             // js_in: css_str
             this.js_out =
-                this.updateEl($selectors, js_in, 'JSON2UL') ? true : false;
+                this.upEl($selectors, js_in, 'JSON2UL') ? true : false;
             return this;
         },
 
@@ -152,8 +152,8 @@ var $loco = function($selectors) {
             return results;
         },
 
-        // updateEl
-        updateEl: function(selectors, data_str, type_str) {
+        // upEl
+        upEl: function(selectors, data_str, type_str) {
           
             // check typeof
             if (typeof selectors == 'string') {
@@ -175,14 +175,14 @@ var $loco = function($selectors) {
                     try {
 
                         // check typeof
-                        if (type_str == 'removeClass' || type_str == 'addClass') {
-                            var c_obj = elements[element].className.split(' ');
+                        if (type_str == 'rClass' || type_str == 'aClass') {
+                            var c_obj = el.className.split(' ');
                             var d_obj = data_str.split(' ');
                             var results = this.isInObject( c_obj, d_obj );
                         }
 
                         // debug type
-                        console.log( 'updateEl: ' + type_str );
+                        //console.log( 'updateEl: ' + type_str );
 
                         // switch type
                         switch (type_str) {
@@ -194,11 +194,11 @@ var $loco = function($selectors) {
                                     el.addEventListener( events_obj[ event_key ], data_str['callback_fn'] );
                     
                                     // debug event
-                                    console.log( events_obj[ event_key ] + ' event added to ', el );
+                                    //console.log( events_obj[ event_key ] + ' event added to ', el );
 
                                 }
                                 break;
-                            case 'removeClass':
+                            case 'rClass':
                                 if (typeof results == 'object') {
                                     for (result in results) {
                                         c_obj.splice(results[result], 1);
@@ -208,7 +208,7 @@ var $loco = function($selectors) {
                                     el.className = classes;
                                 }
                                 break;
-                            case 'addClass':
+                            case 'aClass':
                                 if (typeof results != 'object') {
                                   el.className = el.className ?
                                     el.className += ' ' + data_str : data_str;
@@ -224,38 +224,38 @@ var $loco = function($selectors) {
                                 ul_list += '</ul>\n';
                                 el.innerHTML = ul_list;
                                 break;
-                            case 'upperCase':
+                            case 'uCase':
                                 el.innerHTML =
                                     el.innerHTML.toUpperCase();
                                 break;
-                            case 'lowerCase':
+                            case 'lCase':
                                 el.innerHTML =
                                     el.innerHTML.toLowerCase();
                                 break;
-                            case 'camelCase':
+                            case 'cCase':
                                 el.innerHTML = el.innerHTML.toLowerCase();
                                 el.innerHTML = el.innerHTML.replace(/\b(\w)/ig,
                                     function($1) {
                                         return $1.toUpperCase()
                                     });
-                            case 'trimHTML':
+                            case 'tHTML':
                                 el.innerHTML =
                                     el.innerHTML.trim();
                                 break;
-                            case 'replaceHTML':
+                            case 'rHTML':
                                 var replace = data_str.split(":");
                                 el.innerHTML =
                                     el.innerHTML.replace(replace[0], replace[1]);
                                 break;
-                            case 'appendHTML':
+                            case 'apHTML':
                                 el.innerHTML += (typeof data_str == 'object') ? JSON.stringify( data_str ) : data_str;
                                 break;
-                            case 'addHTML':
+                            case 'adHTML':
                                 el.innerHTML = (typeof data_str == 'object') ? JSON.stringify( data_str ) : data_str;
                                 break;
-                            case 'removeStyle':
+                            case 'rStyle':
                                 var remove_style = true;
-                            case 'addStyle':
+                            case 'aStyle':
                                 if (typeof results != 'object') {
                                     if (typeof data_str == 'object') {
                                         for (var css_prop in data_str) {
@@ -420,7 +420,7 @@ var $ajax = function(request_obj,callback_fn){
         // load ajax
         load: function(){
 
-            console.log( 'get ajax!' );
+            //console.log( 'get ajax!' );
 
             //console.log('load');
 
