@@ -5,7 +5,7 @@
 
 Loco is a fast, small, asynchronous Javascript Library. Loco works with all modern browsers and has a familiar syntax. You can do a lot with Loco.
 
-Loco features a dozen methods and includes [liteAjax](https://github.com/peterprins/liteAjax) to handle Ajax calls. This initial release of Loco is only 5KB minified with [liteAjax](https://github.com/peterprins/liteAjax) included now that's Loco! 
+Loco features a dozen methods and includes [liteAjax](https://github.com/peterprins/liteAjax) to handle Ajax calls. This initial release of Loco is **ONLY 5KB** minified with [liteAjax](https://github.com/peterprins/liteAjax) included now that's Loco! 
 
 ### The Loco Syntax
 
@@ -53,7 +53,15 @@ if($ready(function(){
 			$loco("#test1").addHTML( JSONdata );
 
 			// get loco!
-			$loco("#test2").addHTML( JSONdata ).addStyle('background-color: #000000; color: #ffffff; text-align: center;').addClass( 'test tester testing' ).camelCase().JSON2UL().replaceHTML( 'Are You Doing: You Feeling' ).removeClass('tester').appendHTML('<h1>Are You Feeling Loco?</h1>').replaceHTML("This Is: I'm Conducting");
+			$loco("#test2").addHTML( JSONdata )
+			.addStyle('background-color: #000000; color: #ffffff; text-align: center;')
+			.addClass( 'test tester testing' )
+			.camelCase()
+			.JSON2UL()
+			.replaceHTML( 'Are You Doing: You Feeling' )
+			.removeClass('tester')
+			.appendHTML('<h1>Are You Feeling Loco?</h1>')
+			.replaceHTML("This Is: I'm Conducting");
 
 			// and change the font
 			$loco('#my-loco').addStyle('font-family: courier;');
