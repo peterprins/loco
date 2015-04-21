@@ -1,0 +1,55 @@
+<html>
+<head>
+<title>Loco Test</title>
+
+<script type="text/javascript" src="loco.js"></script>
+
+</head>
+<body>
+
+	<div id="my-loco">
+
+		<p><a href="" id="link">Click or MouseOver Me!</a></p>
+
+		<h2>Test1 Div:</h2>
+		<div id="test1"></div>
+
+		<h2>Test2 Div:</h2>
+		<div id="test2"></div>
+
+	</div>
+
+<script type="text/javascript">
+
+// if ready
+if($ready(function(){
+
+	// set font
+	$loco('#my-loco').addStyle('font-family: sans-serif;');
+
+	// get loco on click and mouseover
+	$loco('#link').onEvent( 'click mouseover', function(e){
+		e.preventDefault();
+
+		// load some ajax
+		$ajax('test.json', function( JSONdata ){
+
+			// load a little json
+			$loco("#test1").addHTML( JSONdata );
+
+			// get loco!
+			$loco("#test2").addHTML( JSONdata ).addStyle('background-color: #000000; color: #ffffff; text-align: center;').addClass( 'test tester testing' ).camelCase().JSON2UL().replaceHTML( 'Are You Doing: You Feeling' ).removeClass('tester').appendHTML('<h1>Are You Feeling Loco?</h1>').replaceHTML("This Is: I'm Conducting");
+
+			// and change the font
+			$loco('#my-loco').addStyle('font-family: courier;');
+
+		});
+
+	});
+
+}));
+
+</script>
+
+</body>
+</html>
