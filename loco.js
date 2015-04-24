@@ -1,13 +1,45 @@
 /*!
-  * loco - v1.0
+  * loco - v1.1
   * https://github.com/peterprins/loco
   *
   * Copyright 2015 Peter Prins
   * Released under the MIT license
   * http://mit-license.org/
   *
-  * Date: 2015-04-20
+  * Date: 2015-04-24
   */
+
+////////////////////
+// $_GET
+var $_GET = function( var_str ){
+    var vars_obj = {};
+    window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi,
+    function(m,key,val){
+        try{
+            vars_obj[ key ] = decodeURIComponent(val.split("+").join(" "));
+        }catch(e){
+            vars_obj[ key ] = val;
+        }
+    });  
+    return vars_obj[ var_str ];
+}
+
+////////////////////
+// $_MOBILE
+var $_MOBILE = (function(){
+    var uAgent = navigator.userAgent;
+    if(uAgent.match(/iPhone/i)){
+        return 'iphone';
+    }else if(uAgent.match(/iPod/i)){
+        return 'ipod';
+    }else if(uAgent.match(/iPad/i)){
+        return 'ipad';
+    }else if(uAgent.match(/Android/i)){
+        return 'android';
+    }else{
+        return false;
+    }
+})();
 
 ////////////////////
 // ready
@@ -38,6 +70,41 @@ var $loco = function($selectors) {
             var data_str = { "event_str" : js_in,
                              "callback_fn" : callback_fn }
             this.js_out = this.upEl($selectors, data_str, 'onEvent') ? true : false;
+            return this;
+        },
+
+        // show
+        show: function() {
+            // js_in: classes_str
+            this.removeStyle('display:none;');
+            return this;
+        },
+
+        // hide
+        hide: function() {
+            // js_in: classes_str
+            this.addStyle('display:none;');
+            return this;
+        },
+
+        // remove
+        remove: function(js_in) {
+            // js_in: classes_str
+            this.js_out = this.upEl($selectors, js_in, 'remove') ? true : false;
+            return this;
+        },
+
+        // setAttr
+        setAttr: function(js_in) {
+            // js_in: classes_str
+            this.js_out = this.upEl($selectors, js_in, 'sAttr') ? true : false;
+            return this;
+        },
+
+        // removeAttr
+        removeAttr: function(js_in) {
+            // js_in: classes_str
+            this.js_out = this.upEl($selectors, js_in, 'rAttr') ? true : false;
             return this;
         },
 
@@ -182,7 +249,7 @@ var $loco = function($selectors) {
                         }
 
                         // debug type
-                        //console.log( 'updateEl: ' + type_str );
+                        console.log( 'updateEl: ' + type_str );
 
                         // switch type
                         switch (type_str) {
@@ -197,6 +264,9 @@ var $loco = function($selectors) {
                                     //console.log( events_obj[ event_key ] + ' event added to ', el );
 
                                 }
+                                break;
+                            case 'remove':
+                                el.parentNode.removeChild(el);
                                 break;
                             case 'rClass':
                                 if (typeof results == 'object') {
@@ -253,13 +323,26 @@ var $loco = function($selectors) {
                             case 'adHTML':
                                 el.innerHTML = (typeof data_str == 'object') ? JSON.stringify( data_str ) : data_str;
                                 break;
+                            case 'rAttr':
+                                var attribute = true;
+                                var remove_attr = true;
+                            case 'sAttr':
+                                var attribute = true;
+                                var remove_attribute = remove_attribute ? true : false;
                             case 'rStyle':
                                 var remove_style = true;
                             case 'aStyle':
                                 if (typeof results != 'object') {
                                     if (typeof data_str == 'object') {
-                                        for (var css_prop in data_str) {
-                                            el.style[css_prop] = data_str[css_prop];
+                                        for (var prop in data_str) {
+
+                                            if(attribute){
+                                                var attr_val = remove_attr ? '' : data_str[prop];
+                                                el.setAttribute(attr_prop,attr_val);
+                                            }else{
+                                                el.style[prop] = remove_style ? '' : data_str[prop];
+                                            }
+
                                         }
                                     } else {
 
@@ -271,9 +354,13 @@ var $loco = function($selectors) {
                                             for (var css_prop in css_element) {
                                                 var prop = css_element[0].trim();
                                                 var val = css_element[1].trim();
-                                                
-                                                // add or remove style
-                                                el.style[prop] = remove_style ? '' : val;
+
+                                                if(attribute){
+                                                    var attr_val = remove_attr ? '' : val;
+                                                    el.setAttribute(prop,attr_val);
+                                                }else{
+                                                    el.style[prop] = remove_style ? '' : val;
+                                                }
 
                                             }
                                         }
@@ -348,7 +435,7 @@ var $ajax = function(request_obj,callback_fn){
                     this.type = request_obj['type'] ? request_obj['type'] : 'application/x-www-form-urlencoded;charset=UTF-8';
                     
                 }else{
-                    this.type = request_obj['type'] ? request_obj['type'] : 'application/json';
+                    this.type = request_obj['type'] ? request_obj['type'] : 'application/json;charset=utf-8';
                 }
 
                 // get data
