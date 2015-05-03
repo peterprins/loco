@@ -1,6 +1,8 @@
 # Loco
 **fast, small, asynchronous**
 
+[Documentation](https://github.com/peterprins/loco/wiki)
+
 ### Description
 
 Loco is a fast, small, asynchronous Javascript Library. Loco works with all modern browsers and has a familiar syntax. You can do a lot with Loco.
