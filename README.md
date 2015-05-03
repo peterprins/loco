@@ -1,7 +1,7 @@
 # Loco
 **fast, small, asynchronous**
 
-[Documentation](https://github.com/peterprins/loco/wiki)
+[**Documentation**](https://github.com/peterprins/loco/wiki)
 
 ### Description
 
